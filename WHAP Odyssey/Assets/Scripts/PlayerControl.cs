@@ -190,6 +190,8 @@ public class PlayerControl : MonoBehaviour {
     [SerializeField]
     private RectTransform blockBarRect;
 
+    public bool Blockable = true;
+
     //if setting x or y respawn, use SetRespawnX or Y() and put amount in thing.
     //if damaging do DamagePlayer() and put amount in thing.
 
@@ -393,9 +395,21 @@ public class PlayerControl : MonoBehaviour {
             if (Blocking == true)
             {
                 blockTimer = 3;
-                GameObject.Find("KP_Arm").GetComponent<ArmSwing>().blockTimer = 3;
             }
-        }        
+        }
+
+        if (blockTimer == 3) {
+            ReleaseBlock();
+            Blockable = false;
+        }
+
+        if (blockTimer == 0) {
+            Blockable = true;
+        }
+
+        if (Blockable == false) {
+            GameObject.Find("KP_Arm").GetComponent<ArmSwing>().m_Anim.SetBool("Block", false);
+        }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         { //Add for new weapons                               
@@ -3133,314 +3147,39 @@ public class PlayerControl : MonoBehaviour {
                         GameObject.Find("KP").GetComponent<PlayerControl>().m_Anim.SetBool("SwingAxe", false);
                     }
                 }
-            }                 
-        
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            if (InventoryOpen == false) {
-                if (GameMenuOpen == false) {
-                    if (BuyMenuOpen == false) {
-                        if (blockTimer <= 0)
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                if (InventoryOpen == false)
+                {
+                    if (GameMenuOpen == false)
+                    {
+                        if (BuyMenuOpen == false)
                         {
-                            Block();       
+                            if (blockTimer <= 0)
+                            {
+                                Block();
+                            }
                         }
-                    }             
-                }
-            }                                                 
-        }
-
-        if (Input.GetKeyUp(KeyCode.Mouse1))
-        {           
-
-                if (Blocking == true)
-                {
-                    blockingTimer = 0;
-                    blockTimer = 3;
-                    GameObject.Find("KP_Arm").GetComponent<ArmSwing>().blockTimer = 3;
-                }
-
-                GameObject.Find("KP_JumpNewArmRight").GetComponent<Animator>().SetBool("Swing", false);
-                GameObject.Find("KP_JumpNewArmLeft").GetComponent<Animator>().SetBool("Swing", false);
-
-                m_Anim.SetBool("Swing", false);
-                Blocking = false;
-                //lesser swords
-                if (WoodWeakLesserSwordActive == true)
-                {
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("WoodWeakLesserSwordBlock", false);
-                }
-                if (WoodMediumLesserSwordActive == true)
-                {
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("WoodMediumLesserSwordBlock", false);
-                }
-                if (WoodStrongLesserSwordActive == true)
-                {
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("WoodStrongLesserSwordBlock", false);
-                }
-                if (IronWeakLesserSwordActive == true)
-                {
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("IronWeakLesserSwordBlock", false);
-                }
-                if (IronMediumLesserSwordActive == true)
-                {
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("IronMediumLesserSwordBlock", false);
-                }
-                if (IronStrongLesserSwordActive == true)
-                {
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("IronStrongLesserSwordBlock", false);
-                }
-                if (SteelWeakLesserSwordActive == true)
-                {
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("SteelWeakLesserSwordBlock", false);
-                }
-                if (SteelMediumLesserSwordActive == true)
-                {
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("SteelMediumLesserSwordBlock", false);
-                }
-                if (SteelStrongLesserSwordActive == true)
-                {
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
-                    GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("SteelStrongLesserSwordBlock", false);
-                }
-                //great swords
-                if (WoodWeakGreatSwordActive == true)
-                {
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("WoodWeakGreatSwordBlock", false);
-                }
-                if (WoodMediumGreatSwordActive == true)
-                {
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("WoodMediumGreatSwordBlock", false);
-                }
-                if (WoodStrongGreatSwordActive == true)
-                {
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("WoodStrongGreatSwordBlock", false);
-                }
-                if (IronWeakGreatSwordActive == true)
-                {
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("IronWeakGreatSwordBlock", false);
-                }
-                if (IronMediumGreatSwordActive == true)
-                {
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("IronMediumGreatSwordBlock", false);
-                }
-                if (IronStrongGreatSwordActive == true)
-                {
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("IronStrongGreatSwordBlock", false);
-                }
-                if (SteelWeakGreatSwordActive == true)
-                {
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("SteelWeakGreatSwordBlock", false);
-                }
-                if (SteelMediumGreatSwordActive == true)
-                {
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("SteelMediumGreatSwordBlock", false);
-                }
-                if (SteelStrongGreatSwordActive == true)
-                {
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
-                    GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("SteelStrongGreatSwordBlock", false);
-                }
-                //broad swords
-                if (WoodWeakBroadSwordActive == true)
-                {
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("WoodWeakBroadSwordBlock", false);
-                }
-                if (WoodMediumBroadSwordActive == true)
-                {
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("WoodMediumBroadSwordBlock", false);
-                }
-                if (WoodStrongBroadSwordActive == true)
-                {
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("WoodStrongBroadSwordBlock", false);
-                }
-                if (IronWeakBroadSwordActive == true)
-                {
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("IronWeakBroadSwordBlock", false);
-                }
-                if (IronMediumBroadSwordActive == true)
-                {
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("IronMediumBroadSwordBlock", false);
-                }
-                if (IronStrongBroadSwordActive == true)
-                {
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("IronStrongBroadSwordBlock", false);
-                }
-                if (SteelWeakBroadSwordActive == true)
-                {
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("SteelWeakBroadSwordBlock", false);
-                }
-                if (SteelMediumBroadSwordActive == true)
-                {
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("SteelMediumBroadSwordBlock", false);
-                }
-                if (SteelStrongBroadSwordActive == true)
-                {
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
-                    GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("SteelStrongBroadSwordBlock", false);
-                }
-                //common axes
-                if (WoodWeakCommonAxeActive == true)
-                {
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("WoodWeakCommonAxeBlock", false);
-                }
-                if (WoodMediumCommonAxeActive == true)
-                {
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("WoodMediumCommonAxeBlock", false);
-                }
-                if (WoodStrongCommonAxeActive == true)
-                {
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("WoodStrongCommonAxeBlock", false);
-                }
-                if (IronWeakCommonAxeActive == true)
-                {
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("IronWeakCommonAxeBlock", false);
-                }
-                if (IronMediumCommonAxeActive == true)
-                {
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("IronMediumCommonAxeBlock", false);
-                }
-                if (IronStrongCommonAxeActive == true)
-                {
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("IronStrongCommonAxeBlock", false);
-                }
-                if (SteelWeakCommonAxeActive == true)
-                {
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("SteelWeakCommonAxeBlock", false);
-                }
-                if (SteelMediumCommonAxeActive == true)
-                {
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("SteelMediumCommonAxeBlock", false);
-                }
-                if (SteelStrongCommonAxeActive == true)
-                {
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
-                    GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("SteelStrongCommonAxeBlock", false);
-                }
-                //battle axes
-                if (WoodWeakBattleAxeActive == true)
-                {
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("WoodWeakBattleAxeBlock", false);
-                }
-                if (WoodMediumBattleAxeActive == true)
-                {
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("WoodMediumBattleAxeBlock", false);
-                }
-                if (WoodStrongBattleAxeActive == true)
-                {
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("WoodStrongBattleAxeBlock", false);
-                }
-                if (IronWeakBattleAxeActive == true)
-                {
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("IronWeakBattleAxeBlock", false);
-                }
-                if (IronMediumBattleAxeActive == true)
-                {
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("IronMediumBattleAxeBlock", false);
-                }
-                if (IronStrongBattleAxeActive == true)
-                {
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("IronStrongBattleAxeBlock", false);
-                }
-                if (SteelWeakBattleAxeActive == true)
-                {
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("SteelWeakBattleAxeBlock", false);
-                }
-                if (SteelMediumBattleAxeActive == true)
-                {
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("SteelMediumBattleAxeBlock", false);
-                }
-                if (SteelStrongBattleAxeActive == true)
-                {
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
-                    GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("SteelStrongBattleAxeBlock", false);
-                }
-                //war axes
-                if (WoodWeakWarAxeActive == true)
-                {
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("WoodWeakWarAxeBlock", false);
-                }
-                if (WoodMediumWarAxeActive == true)
-                {
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("WoodMediumWarAxeBlock", false);
-                }
-                if (WoodStrongWarAxeActive == true)
-                {
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("WoodStrongWarAxeBlock", false);
-                }
-                if (IronWeakWarAxeActive == true)
-                {
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("IronWeakWarAxeBlock", false);
-                }
-                if (IronMediumWarAxeActive == true)
-                {
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("IronMediumWarAxeBlock", false);
-                }
-                if (IronStrongWarAxeActive == true)
-                {
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("IronStrongWarAxeBlock", false);
-                }
-                if (SteelWeakWarAxeActive == true)
-                {
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("SteelWeakWarAxeBlock", false);
-                }
-                if (SteelMediumWarAxeActive == true)
-                {
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("SteelMediumWarAxeBlock", false);
-                }
-                if (SteelStrongWarAxeActive == true)
-                {
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
-                    GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("SteelStrongWarAxeBlock", false);
+                    }
                 }
             }
+
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+
+            if (Blocking == true)
+            {
+                blockingTimer = 0;
+                blockTimer = 3;
+            }
+
+            ReleaseBlock();
+            Blockable = false;
+            GameObject.Find("KP_Arm").GetComponent<ArmSwing>().m_Anim.SetBool("Block", false);
+
+        }
 
             if (transform.position.y <= FallBoundary)
             {
@@ -3451,6 +3190,8 @@ public class PlayerControl : MonoBehaviour {
 
     void Block()
     {
+        GameObject.Find("KP_Arm").GetComponent<ArmSwing>().SwordBlock();
+        if (Blockable == true) {
             blockingForTimer = true;
 
             if (blockingForTimer == true)
@@ -3767,7 +3508,8 @@ public class PlayerControl : MonoBehaviour {
             {
                 GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = true;
                 GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("SteelStrongWarAxeBlock", true);
-            }       
+            }
+        }           
     }
 
     void SetRespawnX(float setx)
@@ -7148,4 +6890,289 @@ public class PlayerControl : MonoBehaviour {
         float _value = (float)_cur / _max;
         blockBarRect.localScale = new Vector3(_value, blockBarRect.localScale.y, blockBarRect.localScale.z);
     }
+
+    void ReleaseBlock() {
+        GameObject.Find("KP_JumpNewArmRight").GetComponent<Animator>().SetBool("Swing", false);
+        GameObject.Find("KP_JumpNewArmLeft").GetComponent<Animator>().SetBool("Swing", false);
+
+        m_Anim.SetBool("Swing", false);
+        Blocking = false;
+        //lesser swords
+        if (WoodWeakLesserSwordActive == true)
+        {
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("WoodWeakLesserSwordBlock", false);
+        }
+        if (WoodMediumLesserSwordActive == true)
+        {
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("WoodMediumLesserSwordBlock", false);
+        }
+        if (WoodStrongLesserSwordActive == true)
+        {
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("WoodStrongLesserSwordBlock", false);
+        }
+        if (IronWeakLesserSwordActive == true)
+        {
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("IronWeakLesserSwordBlock", false);
+        }
+        if (IronMediumLesserSwordActive == true)
+        {
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("IronMediumLesserSwordBlock", false);
+        }
+        if (IronStrongLesserSwordActive == true)
+        {
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("IronStrongLesserSwordBlock", false);
+        }
+        if (SteelWeakLesserSwordActive == true)
+        {
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("SteelWeakLesserSwordBlock", false);
+        }
+        if (SteelMediumLesserSwordActive == true)
+        {
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("SteelMediumLesserSwordBlock", false);
+        }
+        if (SteelStrongLesserSwordActive == true)
+        {
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().Block = false;
+            GameObject.Find("LesserSword").GetComponent<LesserSword>().m_Anim.SetBool("SteelStrongLesserSwordBlock", false);
+        }
+        //great swords
+        if (WoodWeakGreatSwordActive == true)
+        {
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("WoodWeakGreatSwordBlock", false);
+        }
+        if (WoodMediumGreatSwordActive == true)
+        {
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("WoodMediumGreatSwordBlock", false);
+        }
+        if (WoodStrongGreatSwordActive == true)
+        {
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("WoodStrongGreatSwordBlock", false);
+        }
+        if (IronWeakGreatSwordActive == true)
+        {
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("IronWeakGreatSwordBlock", false);
+        }
+        if (IronMediumGreatSwordActive == true)
+        {
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("IronMediumGreatSwordBlock", false);
+        }
+        if (IronStrongGreatSwordActive == true)
+        {
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("IronStrongGreatSwordBlock", false);
+        }
+        if (SteelWeakGreatSwordActive == true)
+        {
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("SteelWeakGreatSwordBlock", false);
+        }
+        if (SteelMediumGreatSwordActive == true)
+        {
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("SteelMediumGreatSwordBlock", false);
+        }
+        if (SteelStrongGreatSwordActive == true)
+        {
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().Block = false;
+            GameObject.Find("GreatSword").GetComponent<GreatSword>().m_Anim.SetBool("SteelStrongGreatSwordBlock", false);
+        }
+        //broad swords
+        if (WoodWeakBroadSwordActive == true)
+        {
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("WoodWeakBroadSwordBlock", false);
+        }
+        if (WoodMediumBroadSwordActive == true)
+        {
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("WoodMediumBroadSwordBlock", false);
+        }
+        if (WoodStrongBroadSwordActive == true)
+        {
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("WoodStrongBroadSwordBlock", false);
+        }
+        if (IronWeakBroadSwordActive == true)
+        {
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("IronWeakBroadSwordBlock", false);
+        }
+        if (IronMediumBroadSwordActive == true)
+        {
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("IronMediumBroadSwordBlock", false);
+        }
+        if (IronStrongBroadSwordActive == true)
+        {
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("IronStrongBroadSwordBlock", false);
+        }
+        if (SteelWeakBroadSwordActive == true)
+        {
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("SteelWeakBroadSwordBlock", false);
+        }
+        if (SteelMediumBroadSwordActive == true)
+        {
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("SteelMediumBroadSwordBlock", false);
+        }
+        if (SteelStrongBroadSwordActive == true)
+        {
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().Block = false;
+            GameObject.Find("BroadSword").GetComponent<BroadSword>().m_Anim.SetBool("SteelStrongBroadSwordBlock", false);
+        }
+        //common axes
+        if (WoodWeakCommonAxeActive == true)
+        {
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("WoodWeakCommonAxeBlock", false);
+        }
+        if (WoodMediumCommonAxeActive == true)
+        {
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("WoodMediumCommonAxeBlock", false);
+        }
+        if (WoodStrongCommonAxeActive == true)
+        {
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("WoodStrongCommonAxeBlock", false);
+        }
+        if (IronWeakCommonAxeActive == true)
+        {
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("IronWeakCommonAxeBlock", false);
+        }
+        if (IronMediumCommonAxeActive == true)
+        {
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("IronMediumCommonAxeBlock", false);
+        }
+        if (IronStrongCommonAxeActive == true)
+        {
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("IronStrongCommonAxeBlock", false);
+        }
+        if (SteelWeakCommonAxeActive == true)
+        {
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("SteelWeakCommonAxeBlock", false);
+        }
+        if (SteelMediumCommonAxeActive == true)
+        {
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("SteelMediumCommonAxeBlock", false);
+        }
+        if (SteelStrongCommonAxeActive == true)
+        {
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().Block = false;
+            GameObject.Find("CommonAxe").GetComponent<CommonAxe>().m_Anim.SetBool("SteelStrongCommonAxeBlock", false);
+        }
+        //battle axes
+        if (WoodWeakBattleAxeActive == true)
+        {
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("WoodWeakBattleAxeBlock", false);
+        }
+        if (WoodMediumBattleAxeActive == true)
+        {
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("WoodMediumBattleAxeBlock", false);
+        }
+        if (WoodStrongBattleAxeActive == true)
+        {
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("WoodStrongBattleAxeBlock", false);
+        }
+        if (IronWeakBattleAxeActive == true)
+        {
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("IronWeakBattleAxeBlock", false);
+        }
+        if (IronMediumBattleAxeActive == true)
+        {
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("IronMediumBattleAxeBlock", false);
+        }
+        if (IronStrongBattleAxeActive == true)
+        {
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("IronStrongBattleAxeBlock", false);
+        }
+        if (SteelWeakBattleAxeActive == true)
+        {
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("SteelWeakBattleAxeBlock", false);
+        }
+        if (SteelMediumBattleAxeActive == true)
+        {
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("SteelMediumBattleAxeBlock", false);
+        }
+        if (SteelStrongBattleAxeActive == true)
+        {
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().Block = false;
+            GameObject.Find("BattleAxe").GetComponent<BattleAxe>().m_Anim.SetBool("SteelStrongBattleAxeBlock", false);
+        }
+        //war axes
+        if (WoodWeakWarAxeActive == true)
+        {
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("WoodWeakWarAxeBlock", false);
+        }
+        if (WoodMediumWarAxeActive == true)
+        {
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("WoodMediumWarAxeBlock", false);
+        }
+        if (WoodStrongWarAxeActive == true)
+        {
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("WoodStrongWarAxeBlock", false);
+        }
+        if (IronWeakWarAxeActive == true)
+        {
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("IronWeakWarAxeBlock", false);
+        }
+        if (IronMediumWarAxeActive == true)
+        {
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("IronMediumWarAxeBlock", false);
+        }
+        if (IronStrongWarAxeActive == true)
+        {
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("IronStrongWarAxeBlock", false);
+        }
+        if (SteelWeakWarAxeActive == true)
+        {
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("SteelWeakWarAxeBlock", false);
+        }
+        if (SteelMediumWarAxeActive == true)
+        {
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("SteelMediumWarAxeBlock", false);
+        }
+        if (SteelStrongWarAxeActive == true)
+        {
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().Block = false;
+            GameObject.Find("WarAxe").GetComponent<WarAxe>().m_Anim.SetBool("SteelStrongWarAxeBlock", false);
+        }
+    }
 }
+
