@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 68168edcebf3ed649a07f6d4bec4584b
-timeCreated: 1469846097
+guid: 9954a1a6a145033499ece4dcf6be5b34
+timeCreated: 1471815197
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: KP_HouseInsideDoorOpen
-    21300002: KP_HouseOutsideDoorOpen
-    21300004: KP_HouseInsideDoorClosed
-    21300006: KP_HouseOutsideDoorClosed
+    21300000: KPHouseOutsideClosed
+    21300002: KPHouseOutsideOpen
+    21300004: KPHouseInsideClosed
+    21300006: KPHouseInsideOpen
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -56,49 +56,49 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: KP_HouseInsideDoorOpen
+      name: KPHouseOutsideClosed
       rect:
         serializedVersion: 2
         x: 0
-        y: 308
+        y: 357
         width: 210
-        height: 89
+        height: 118
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - serializedVersion: 2
-      name: KP_HouseOutsideDoorOpen
+      name: KPHouseOutsideOpen
       rect:
         serializedVersion: 2
         x: 0
-        y: 197
+        y: 238
         width: 210
-        height: 89
+        height: 118
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - serializedVersion: 2
-      name: KP_HouseInsideDoorClosed
+      name: KPHouseInsideClosed
       rect:
         serializedVersion: 2
         x: 0
-        y: 100
+        y: 119
         width: 210
-        height: 89
+        height: 118
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - serializedVersion: 2
-      name: KP_HouseOutsideDoorClosed
+      name: KPHouseInsideOpen
       rect:
         serializedVersion: 2
         x: 0
-        y: 4
+        y: 0
         width: 210
-        height: 89
+        height: 118
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -282,9 +282,15 @@ public class PlayerControl : MonoBehaviour {
 
         if (blockTimer == 0)
         {
-            SetBlockBar(3, 3);
+            if (blockingTimer == 0)
+            {
+                SetBlockBar(3, 3);
+            }
+            else {
+                SetBlockBar(blockingTimer, 3);
+            } 
         }
-        else {         
+        else {       
             SetBlockBar(blockTimer, 3);
         }
 
@@ -6892,6 +6898,7 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void ReleaseBlock() {
+
         GameObject.Find("KP_JumpNewArmRight").GetComponent<Animator>().SetBool("Swing", false);
         GameObject.Find("KP_JumpNewArmLeft").GetComponent<Animator>().SetBool("Swing", false);
 

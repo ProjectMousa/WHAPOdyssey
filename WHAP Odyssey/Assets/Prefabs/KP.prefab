@@ -877,7 +877,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 179690}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 981bb34eda927a443a46400e1754dd73, type: 3}
+  m_Script: {fileID: 11500000, guid: 36b7c421000560043abdd8c1648772d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCurrentHealth: 100
@@ -885,7 +885,7 @@ MonoBehaviour:
   RespawnPlayerXPos: 0
   RespawnPlayerYPos: 0
   Swing: 0
-  DamageAbsorb: 100
+  DamageAbsorb: 0
   InventoryOpen: 0
   GameMenuOpen: 0
   BuyMenuOpen: 0
@@ -911,6 +911,7 @@ MonoBehaviour:
   WeaponPrice: 0
   ArmorPrice: 0
   blockBarRect: {fileID: 0}
+  Blockable: 1
 --- !u!114 &11433836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -971,7 +972,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Anim: {fileID: 0}
-  blockTimer: 0
   Sword: 0
   Axe: 0
 --- !u!114 &11494078
