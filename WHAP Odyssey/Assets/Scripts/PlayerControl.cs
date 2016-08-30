@@ -226,7 +226,7 @@ public class PlayerControl : MonoBehaviour {
         pauseMenuUI.GetComponent<PauseMenuUI>().m_Anim.ResetTrigger("None");
 
         SetRespawnX(-0.513f);
-        SetRespawnY(-0.007f);
+        SetRespawnY(-0.010924f);
 
         if (NoArmorActive == true)
         {
