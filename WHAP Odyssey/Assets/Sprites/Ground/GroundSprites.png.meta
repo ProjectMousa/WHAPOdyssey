@@ -1,0 +1,266 @@
+fileFormatVersion: 2
+guid: 8258610431a575842a11adfbebfee98e
+timeCreated: 1473107786
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: GrassLong
+    21300002: GrassShort
+    21300004: DirtLong
+    21300006: DirtShort
+    21300008: UndergroundLong
+    21300010: UndergroundShort
+    21300012: DeepUnderLong
+    21300014: DeepUnderShort
+    21300016: GrassLongUp
+    21300018: GrassLongDown
+    21300020: GrassShortUp
+    21300022: GrassShortDown
+    21300024: UndergroundLongUp
+    21300026: UndergroundLongDown
+    21300028: UndergroundShortUp
+    21300030: UndergroundShortDown
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GrassLong
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 550
+        width: 200
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: GrassShort
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 550
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: DirtLong
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 499
+        width: 200
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: DirtShort
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 499
+        width: 50
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: UndergroundLong
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 550
+        width: 200
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: UndergroundShort
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 550
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: DeepUnderLong
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 499
+        width: 200
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: DeepUnderShort
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 499
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: GrassLongUp
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 399
+        width: 200
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: GrassLongDown
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 299
+        width: 200
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: GrassShortUp
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 399
+        width: 50
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: GrassShortDown
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 299
+        width: 50
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: UndergroundLongUp
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 399
+        width: 200
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: UndergroundLongDown
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 299
+        width: 200
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: UndergroundShortUp
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 399
+        width: 50
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: UndergroundShortDown
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 299
+        width: 50
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

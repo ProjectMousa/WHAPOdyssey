@@ -16,6 +16,10 @@ public class Camera2DFollow : MonoBehaviour {
 	Vector3 lookAheadPos;
 
 	float nextTimeToSearch = 0;
+
+    void Awake() {
+        this.transform.position = new Vector3(GameObject.Find("KP").transform.position.x, GameObject.Find("KP").transform.position.y, this.transform.position.z);
+    }
 	
 	// Use this for initialization
 	void Start () {

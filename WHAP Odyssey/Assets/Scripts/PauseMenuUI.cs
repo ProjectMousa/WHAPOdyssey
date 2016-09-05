@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuUI : MonoBehaviour {
 
-    public Animator m_Anim;
+    public Animator m_Anim;   
 
-    public void Quit() {
-        Application.Quit();
+    public void MenuReturn() {
+        SceneManager.LoadScene("homeScreen");
     }
 
     public void Resume() {
