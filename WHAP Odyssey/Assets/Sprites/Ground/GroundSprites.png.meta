@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 8258610431a575842a11adfbebfee98e
-timeCreated: 1473107786
+timeCreated: 1473206797
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -20,6 +20,8 @@ TextureImporter:
     21300026: UndergroundLongDown
     21300028: UndergroundShortUp
     21300030: UndergroundShortDown
+    21300032: GrassCoverLeft
+    21300034: GrassCoverRight
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -255,6 +257,30 @@ TextureImporter:
         y: 299
         width: 50
         height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: GrassCoverLeft
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 578
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: GrassCoverRight
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 578
+        width: 28
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
